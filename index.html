@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bajo el Mismo Cielo 💫</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Playfair+Display:wght@400;600;700&family=Dancing+Script:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --night-deep: #0a0e27;
+            --night-mid: #1a1d3a;
+            --star-gold: #ffd700;
+            --star-white: #fff5e1;
+            --rose-soft: #ff6b9d;
+            --rose-deep: #c44569;
+            --text-light: #f5f5f5;
+        }
+
+        body {
+            font-family: 'Crimson Text', serif;
+            background: linear-gradient(to bottom, var(--night-deep), var(--night-mid), #2d1b3d);
+            color: var(--text-light);
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Cielo estrellado animado */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            background: var(--star-white);
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        @keyframes shoot {
+            0% {
+                transform: translate(0, 0) rotate(-45deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-300px, 300px) rotate(-45deg);
+                opacity: 0;
+            }
+        }
+
+        .shooting-star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--star-white), transparent);
+            animation: shoot 3s infinite;
+        }
+
+        /* Corazones flotantes */
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            color: var(--rose-soft);
+            font-size: 20px;
+            opacity: 0;
+            animation: float-heart 15s infinite;
+        }
+
+        @keyframes float-heart {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Contenedor principal */
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 30px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Título principal */
+        .title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--star-gold), var(--star-white), var(--rose-soft));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInDown 1.5s ease-out;
+            letter-spacing: 2px;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Carta con efecto de papel */
+        .letter {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: clamp(30px, 5vw, 60px);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            animation: fadeInUp 1.5s ease-out 0.3s both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .letter::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255, 107, 157, 0.05), transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(255, 215, 0, 0.05), transparent 40%);
+            pointer-events: none;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Poema */
+        .poem {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            line-height: 2;
+            text-align: center;
+            color: var(--text-light);
+            position: relative;
+            z-index: 1;
+        }
+
+        .poem p {
+            margin-bottom: 1.5em;
+            opacity: 0;
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        .poem p:nth-child(1) { animation-delay: 0.6s; }
+        .poem p:nth-child(2) { animation-delay: 0.8s; }
+        .poem p:nth-child(3) { animation-delay: 1s; }
+        .poem p:nth-child(4) { animation-delay: 1.2s; }
+        .poem p:nth-child(5) { animation-delay: 1.4s; }
+        .poem p:nth-child(6) { animation-delay: 1.6s; }
+        .poem p:nth-child(7) { animation-delay: 1.8s; }
+        .poem p:nth-child(8) { animation-delay: 2s; }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .highlight {
+            color: var(--star-gold);
+            font-weight: 600;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+        }
+
+        .emphasis {
+            color: var(--rose-soft);
+            font-style: italic;
+        }
+
+        /* Firma */
+        .signature {
+            margin-top: 40px;
+            text-align: right;
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(1.3rem, 3vw, 1.8rem);
+            color: var(--rose-soft);
+            animation: fadeIn 1s ease-out 2.2s both;
+        }
+
+        /* Decoración de corazón grande */
+        .big-heart {
+            position: fixed;
+            bottom: -100px;
+            right: -100px;
+            font-size: 400px;
+            color: var(--rose-soft);
+            opacity: 0.03;
+            z-index: 0;
+            animation: pulse 4s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Botón música */
+        .music-toggle {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid var(--rose-soft);
+            color: var(--rose-soft);
+            padding: 15px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Crimson Text', serif;
+            font-size: 1rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            z-index: 100;
+            box-shadow: 0 5px 20px rgba(255, 107, 157, 0.3);
+        }
+
+        .music-toggle:hover {
+            background: var(--rose-soft);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 20px;
+            }
+            
+            .letter {
+                padding: 30px 20px;
+            }
+
+            .music-toggle {
+                bottom: 20px;
+                right: 20px;
+                padding: 12px 20px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cielo estrellado -->
+    <div class="stars" id="stars"></div>
+    
+    <!-- Corazones flotantes -->
+    <div class="hearts" id="hearts"></div>
+
+    <!-- Corazón gigante de fondo -->
+    <div class="big-heart">♥</div>
+
+    <!-- Contenedor principal -->
+    <div class="container">
+        <h1 class="title">Bajo el Mismo Cielo</h1>
+        
+        <div class="letter">
+            <div class="poem">
+                <p>Hoy, en este día de corazones rojos<br>
+                y promesas susurradas al viento,<br>
+                solo quiero decirte<br>
+                que <span class="highlight">te amo</span>…<br>
+                pero no como se dicen las palabras,<br>
+                sino como arden las estrellas.</p>
+
+                <p>Te amo como el cielo ama la noche,<br>
+                como la luna persigue tu nombre<br>
+                cuando cierro los ojos<br>
+                y me duele la distancia.</p>
+
+                <p>Porque sí…<br>
+                detesto cada kilómetro que nos separa,<br>
+                cada abrazo que no puedo darte,<br>
+                cada beso que se queda suspendido<br>
+                entre mi boca y tu recuerdo.</p>
+
+                <p>Pero ni la distancia puede apagar<br>
+                lo que siento por ti.<br>
+                <span class="highlight">Mi amor por ti es más grande que el cielo,</span><br>
+                más constante que las estrellas,<br>
+                más intenso que el fuego<br>
+                que se enciende cuando pienso en <span class="emphasis">tus ojos cafés.</span></p>
+
+                <p>Esos ojos…<br>
+                que no son solo color,<br>
+                son universo.<br>
+                Son constelaciones donde me pierdo,<br>
+                son hogar,<br>
+                son el lugar donde quiero vivir<br>
+                toda mi vida.</p>
+
+                <p><span class="highlight">Te amo</span> con pasión,<br>
+                con ternura,<br>
+                con esa fuerza que hace temblar el alma<br>
+                cuando imagino tu risa cerca de mi pecho.</p>
+
+                <p>Y aunque hoy no pueda tocar tu mano,<br>
+                sé que miramos el mismo cielo.<br>
+                Y cada estrella que brilla esta noche<br>
+                lleva mi amor hasta ti.</p>
+
+                <p><span class="highlight">Feliz San Valentín, mi vida.</span><br>
+                Te amo más de lo que la distancia puede medir,<br>
+                más de lo que las palabras pueden explicar.<br>
+                Y cuando por fin estemos juntos,<br>
+                el universo entero va a entender<br>
+                que <span class="emphasis">siempre fuimos destino.</span></p>
+            </div>
+            
+            <div class="signature">
+                Con todo mi amor,<br>para mi dulcesito ♥
+            </div>
+        </div>
+    </div>
+
+    <!-- Botón de música -->
+    <button class="music-toggle" id="musicToggle" onclick="toggleMusic()">
+        🎵 Música
+    </button>
+
+    <!-- Audio de fondo (opcional) -->
+    <audio id="bgMusic" loop>
+        <!-- Puedes agregar un enlace a tu canción favorita aquí -->
+        <!-- <source src="tu-cancion.mp3" type="audio/mpeg"> -->
+    </audio>
+
+    <script>
+        // Crear estrellas
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const numberOfStars = 150;
+
+            for (let i = 0; i < numberOfStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                
+                const size = Math.random() * 3 + 1;
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                
+                starsContainer.appendChild(star);
+            }
+
+            // Crear estrellas fugaces
+            for (let i = 0; i < 5; i++) {
+                const shootingStar = document.createElement('div');
+                shootingStar.className = 'shooting-star';
+                shootingStar.style.left = Math.random() * 100 + '%';
+                shootingStar.style.top = Math.random() * 50 + '%';
+                shootingStar.style.animationDelay = (Math.random() * 10 + i * 4) + 's';
+                shootingStar.style.width = '100px';
+                starsContainer.appendChild(shootingStar);
+            }
+        }
+
+        // Crear corazones flotantes
+        function createHearts() {
+            const heartsContainer = document.getElementById('hearts');
+            const numberOfHearts = 15;
+
+            for (let i = 0; i < numberOfHearts; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = '♥';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 15 + 's';
+                heart.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                heartsContainer.appendChild(heart);
+            }
+        }
+
+        // Control de música
+        let musicPlaying = false;
+        function toggleMusic() {
+            const music = document.getElementById('bgMusic');
+            const button = document.getElementById('musicToggle');
+            
+            if (musicPlaying) {
+                music.pause();
+                button.textContent = '🎵 Música';
+            } else {
+                music.play();
+                button.textContent = '🔇 Pausar';
+            }
+            musicPlaying = !musicPlaying;
+        }
+
+        // Inicializar
+        createStars();
+        createHearts();
+
+        // Efecto parallax suave al mover el mouse
+        document.addEventListener('mousemove', (e) => {
+            const stars = document.querySelectorAll('.star');
+            const mouseX = e.clientX / window.innerWidth;
+            const mouseY = e.clientY / window.innerHeight;
+            
+            stars.forEach((star, index) => {
+                const speed = (index % 3 + 1) * 2;
+                const x = (mouseX - 0.5) * speed;
+                const y = (mouseY - 0.5) * speed;
+                star.style.transform = `translate(${x}px, ${y}px)`;
+            });
+        });
+    </script>
+</body>
+</html>
